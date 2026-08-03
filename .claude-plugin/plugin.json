@@ -1,0 +1,8 @@
+{
+  "name": "stock-skills",
+  "description": "资讯与投研相关的 Claude Code 技能集。当前收录：ai-news-brief（AI 技术/融资/社媒简报，覆盖中国与全球）。",
+  "version": "0.1.0",
+  "author": {
+    "name": "lmm03"
+  }
+}
