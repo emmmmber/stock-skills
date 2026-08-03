@@ -32,12 +32,34 @@ export.arxiv.org          → 连接超时
 
 ```
 skills/ai-news-brief/
-├── SKILL.md                      四步工作流 + 六条红线
-└── reference/
-    ├── sources.md                实测校准的域名白名单/黑名单、WebFetch 可用性
-    ├── queries.md                中英双语检索词库
-    └── report-template.md        简报模板、三档重要性分级、空板块写法
+├── SKILL.md                      五步工作流 + 六条红线
+├── reference/
+│   ├── sources.md                实测校准的域名白名单/黑名单、WebFetch 可用性
+│   ├── queries.md                中英双语检索词库
+│   └── report-template.md        简报模板、三档重要性分级、空板块写法
+└── scripts/
+    └── push-to-ima.py            投递到腾讯 IMA 知识库（零依赖，标准库）
 ```
+
+### 投递到腾讯 IMA 知识库
+
+```bash
+export IMA_CLIENT_ID=...   # https://ima.qq.com/agent-interface 申请
+export IMA_API_KEY=...
+
+python skills/ai-news-brief/scripts/push-to-ima.py --probe          # 先探测
+python skills/ai-news-brief/scripts/push-to-ima.py 周报.md --folder 新闻总结
+```
+
+走 `notes/import_doc` 建笔记 → `wiki/add_knowledge`（`media_type=11`）挂进知识库文件夹的
+纯 JSON 路径，绕开 `create_media` + COS 二进制上传（需要 COS 签名和临时密钥，依赖更重）。
+凭据只从环境变量读，不接受命令行传参。目标文件夹需事先在 IMA 里建好。
+
+> ⚠️ **该脚本未经真实 API 验证**。编写环境的网络策略屏蔽了 `ima.qq.com`，无法联调；
+> API 契约来自官方 `ima-skills` 接入包的公开文档。已验证的部分：语法、CLI、凭据缺失保护、
+> 错误路径、`--dry-run` 的请求体构造。未验证的部分：响应信封结构、列表接口的字段名、
+> 以及 `add_knowledge` 挂载笔记时 `media_id` 取 `doc_id` 这一推断。
+> **首次使用务必先 `--probe`**，它会打印接口实际返回的字段名，对不上就照着改。
 
 ### 环境校准结论（2026-08-03 实测）
 

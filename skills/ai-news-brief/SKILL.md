@@ -33,6 +33,7 @@ metadata:
 | [`reference/sources.md`](reference/sources.md) | 已实测的域名白名单（中/英 × 技术/融资/社媒）、**必须避开的黑名单**、WebFetch 可用性说明 | 每次执行前必读，`allowed_domains` 直接从这里抄 |
 | [`reference/queries.md`](reference/queries.md) | 中英双语搜索词模板库，按板块和时间窗组织 | 组织检索时读 |
 | [`reference/report-template.md`](reference/report-template.md) | 简报输出模板、条目写法、重要性分级、日期标注规范 | 写报告时读 |
+| [`scripts/push-to-ima.py`](scripts/push-to-ima.py) | 把生成好的简报投递到腾讯 IMA 知识库指定文件夹 | 用户要求推送到 IMA 时 |
 
 ## 工作流
 
@@ -88,6 +89,33 @@ https://github.com/trending/python?since=daily # 按语言收窄
 套 `reference/report-template.md`。默认输出 Markdown 到对话里；用户要文件就写到 `reports/YYYY-MM-DD-ai-brief.md`。
 
 报告末尾必须有「本期检索说明」，写清楚：查了哪些板块、时间窗、哪些板块素材偏少或没查到。**空板块要明说空，不要用凑数条目填满**。
+
+### Step 5 · 投递（可选）
+
+用户要求存盘或推送到知识库时才做，默认不做。
+
+**存本地**：直接写文件。Windows 用户常用 `D:\AI周报\<年份>\`，先确认目录存在再写。
+
+**推送到腾讯 IMA 知识库**：用 `scripts/push-to-ima.py`。
+
+```bash
+# 凭据从环境变量读，不要写进命令行或提交到仓库
+export IMA_CLIENT_ID=...   # Windows: set IMA_CLIENT_ID=...
+export IMA_API_KEY=...     # 申请地址 https://ima.qq.com/agent-interface
+
+# 首次使用：先探测，确认知识库和目标文件夹能被正确识别
+python scripts/push-to-ima.py --probe
+
+# 正式投递
+python scripts/push-to-ima.py 2026-08-03-ai-weekly.md --kb 我的知识库 --folder 新闻总结
+```
+
+走的是 `notes/import_doc` 建笔记 → `wiki/add_knowledge`（`media_type=11`）挂进知识库文件夹
+的纯 JSON 路径，零第三方依赖。目标文件夹**必须已经在 IMA 里建好**，脚本不会自动创建。
+
+**首次跑一定先 `--probe`**：IMA OpenAPI 的响应信封和列表字段名官方文档没有完整说明，
+脚本对常见结构做了容错，但如果接口结构和预期不符，`--probe` 会把实际返回的字段名打出来，
+比直接投递失败好排查。
 
 ## 红线
 
