@@ -54,26 +54,79 @@ model announcement release
 
 ## 融资 / 投资
 
-**中文**
+> 融资板块覆盖**泛科技**，且要求六字段结构化输出。
+> 完整工作流、领域分工、口径规范见 [`funding.md`](funding.md)——**做融资板块前必读那一份**。
+> 这里只给 query 模板。
+
+### 第一段 · 扫榜（捞交易清单）
+
+**中文 · 栏目直搜**（效率最高，优先跑）
 ```
-AI 融资 轮 亿元 {窗口}
-大模型公司 估值 投资 {年月}
-AI 芯片 具身智能 融资 {窗口}
+投中网 投融周报 {年月}
 投资界 AI 周报 {年月}
 ```
-> 最后一条是针对 `pedaily.cn` 的栏目名直搜，实测能一次捞到整周的交易汇总，效率最高。
 
-**英文**
+**中文 · 综合**
 ```
-AI startup raises Series funding round {窗口}
-AI company valuation funding announced {年月}
-AI infrastructure investment billion {窗口}
+融资 轮 亿元 科技公司 {窗口}
+硬科技 融资 估值 {年月}
+{领域} 融资 领投 {窗口}
 ```
 
-**注意金额单位**：中文源写「亿元」通常指人民币，「亿美元」才是美元；
-英文源的 `billion` 是十亿。转述时**保留原文单位和币种**，不要擅自换算。
-实测搜索摘要里出现过「DeepSeek 融资 500 亿元 / 估值 4000 亿」这类表述，
-其中数量级需要回原文核对——**核对不了就照抄原文表述并标注来源，不要自己算**。
+**中文 · 分领域**（按本期需要挑 1-2 个）
+```
+AI 大模型 融资 亿元 {窗口}
+半导体 芯片 融资 轮 {窗口}
+机器人 具身智能 融资 估值 {窗口}
+生物医药 创新药 融资 轮 {窗口}
+新能源 储能 电池 融资 {窗口}
+商业航天 卫星 融资 {窗口}
+企业服务 SaaS 融资 {窗口}
+```
+
+**英文 · 综合**
+```
+startup raises funding round led by {窗口}
+biggest funding rounds this week {年月}
+tech startup valuation Series funding {窗口}
+```
+
+**英文 · 分领域**
+```
+biotech startup raises Series funding {窗口}
+semiconductor chip startup funding round {窗口}
+robotics investments funding {年月}
+space defense startup raises {窗口}
+climate energy startup funding round {窗口}
+fintech startup raises Series {窗口}
+```
+
+### 第二段 · 逐笔深挖（补齐六字段）
+
+**不加 `allowed_domains`**，开放搜索命中率高得多。每笔 🔴 交易做一条：
+
+```
+<公司名> 融资 估值 创始人 背景
+<公司名> 成立 团队 产品 客户
+<Company> funding valuation founder background
+<Company> raises Series <X> led by investors
+```
+
+实测：一条「星动纪元 人形机器人 融资 估值 创始人 陈建宇 清华」同时拿到了
+成立时间、产品迭代次数、交付量、客户结构、历轮投资方、最新估值、
+以及创始人的本科/博士/任职履历——六字段一次填满。
+
+**query 里带上已知的人名或机构名会显著提升命中率**（上例里的「陈建宇 清华」）。
+第一段扫榜时如果看到创始人姓名，第二段务必带上。
+
+### 单位与口径
+
+- 中文源「亿元」默认人民币，「亿美元」才是美元；英文源 `billion` = 十亿。
+  **保留原文币种，不要擅自换算**——汇率会变，换算过的数字日后无法回溯核对
+- **累计融资 ≠ 本轮融资**。实测陷阱：「必博半导体完成 A+ 轮，累计融资超 9 亿元」
+  ——9 亿是累计数，本轮金额未披露
+- 实测摘要里出现过「DeepSeek 融资 500 亿元 / 估值 4000 亿」这类表述，
+  数量级需回原文核对——**核对不了就照抄原文表述并标注来源，不要自己算**
 
 ## 社媒 / 社区热议
 

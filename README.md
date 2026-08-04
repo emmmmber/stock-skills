@@ -4,7 +4,10 @@
 
 | 技能 | 说明 | 依赖 |
 |---|---|---|
-| [`ai-news-brief`](skills/ai-news-brief/SKILL.md) | AI 资讯简报：汇总中国与全球的 AI 技术新闻、融资动态、社媒热议，输出带来源链接的中文简报（日报/周报/专题） | 无（纯 WebSearch/WebFetch） |
+| [`ai-news-brief`](skills/ai-news-brief/SKILL.md) | 科技资讯简报：汇总中国与全球的 AI 技术新闻、**泛科技融资动态**、社媒热议，输出带来源链接的中文简报（日报/周报/专题） | 无（纯 WebSearch/WebFetch） |
+
+融资板块覆盖 AI、半导体、机器人、生物医药、新能源、商业航天、金融科技等全领域，
+每笔重点交易结构化输出六个字段：**名称 / 融资事件 / 融资方 / 估值 / 公司简介 / 创始人背景**。
 
 ## ai-news-brief
 
@@ -36,6 +39,7 @@ skills/ai-news-brief/
 ├── reference/
 │   ├── sources.md                实测校准的域名白名单/黑名单、WebFetch 可用性
 │   ├── queries.md                中英双语检索词库
+│   ├── funding.md                融资作业手册：两段式检索、领域分工、六字段规范、金额口径
 │   └── report-template.md        简报模板、三档重要性分级、空板块写法
 └── scripts/
     └── push-to-ima.py            投递到腾讯 IMA 知识库（零依赖，标准库）

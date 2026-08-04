@@ -9,8 +9,9 @@
 **是整个调用失败，不是跳过该域名降级返回**。
 
 ```
-reuters.com      theverge.com     arstechnica.com
-wired.com        reddit.com       ft.com            wsj.com
+reuters.com      theverge.com     arstechnica.com    wired.com
+reddit.com       ft.com           wsj.com            businessinsider.com
+techinasia.com
 ```
 
 > 遇到新的被拒域名，把它加到这张表里，并从下面的白名单删掉。
@@ -46,24 +47,58 @@ Reddit 上的讨论只能通过**不加 `allowed_domains` 的开放搜索**间�
 
 ### 融资 / 投资
 
-**英文**
-```json
-["techcrunch.com", "crunchbase.com", "axios.com", "cnbc.com",
- "venturebeat.com", "theinformation.com", "sifted.eu", "pitchbook.com"]
-```
-- `sifted.eu` — 欧洲创业公司，补美国视角的盲区
+> 融资板块覆盖**泛科技**（不限 AI），且要求结构化输出六个字段。
+> **完整的领域分工、两段式检索工作流、口径规范见 [`funding.md`](funding.md)。**
+> 这里只列域名白名单。
 
-**中文**
+**英文 · 综合**
 ```json
-["pedaily.cn", "itjuzi.com", "36kr.com", "cls.cn",
- "wallstreetcn.com", "caixin.com", "yicai.com", "tmtpost.com", "scmp.com"]
+["techcrunch.com", "crunchbase.com", "axios.com", "cnbc.com", "venturebeat.com",
+ "theinformation.com", "sifted.eu", "pitchbook.com", "fortune.com", "forbes.com",
+ "eu-startups.com", "dealstreetasia.com", "kr-asia.com"]
 ```
-- **`pedaily.cn`（投资界）是中文 AI 融资的首选源**——实测它有固定的「投资界 AI 周报」栏目，
-  一篇就能覆盖一周主要交易，效率远高于逐条搜
-- `itjuzi.com`（IT桔子）— 交易数据库，适合查具体公司的轮次历史
-- `cls.cn`（财联社）/ `wallstreetcn.com`（华尔街见闻）— 快讯，上市公司相关消息快
-- `caixin.com`（财新）/ `yicai.com`（第一财经）— 深度，但财新有付费墙
-- `scmp.com`（南华早报）— 中国科技的英文报道，做中英对照时有用
+
+**英文 · 垂直领域**
+```json
+["fiercebiotech.com", "endpts.com", "statnews.com", "therobotreport.com",
+ "spacenews.com", "payloadspace.com", "breakingdefense.com", "semianalysis.com",
+ "electrek.co", "insideevs.com", "canarymedia.com", "utilitydive.com",
+ "finextra.com", "pymnts.com", "ieeespectrum.org", "cleantechnica.com"]
+```
+
+**英文 · 公司档案库**（第二段深挖用）
+```json
+["tracxn.com", "pitchbook.com", "cbinsights.com", "dealroom.co",
+ "linkedin.com", "wellfound.com", "sec.gov"]
+```
+
+**中文 · 综合**
+```json
+["pedaily.cn", "chinaventure.com.cn", "itjuzi.com", "cyzone.cn", "iyiou.com",
+ "36kr.com", "stcn.com", "cls.cn", "wallstreetcn.com", "caixin.com",
+ "yicai.com", "tmtpost.com", "jiemian.com", "thepaper.cn", "21jingji.com",
+ "xueqiu.com", "scmp.com"]
+```
+
+**中文 · 垂直领域**
+```json
+["zhidx.com", "eefocus.com", "vcbeat.net", "d1ev.com", "gasgoo.com", "leiphone.com"]
+```
+
+关键入口（实测效率最高的几个）：
+
+- **`chinaventure.com.cn`（投中网）「投融周报」**——泛科技全领域，一篇覆盖一周交易。
+  中文侧效率最高的单一入口，搜 `投中网 投融周报 <年月>` 直接命中
+- **`pedaily.cn`（投资界）「AI 周报」**——AI 垂直，同上
+- **`stcn.com`（证券时报）**——中文源里少数会在标题直接写出估值的（实测「估值超百亿元」）
+- **`zhidx.com`（智东西/芯东西/车东西）**——半导体、机器人、智能汽车的融资快讯密度高
+- **`vcbeat.net`（动脉网）**——生物医药/医疗器械融资，中文侧几乎是唯一的垂直源
+- **`fiercebiotech.com` 的 Fundraising Tracker**——按年维护的滚动页，一页覆盖全年生物医药融资
+- **`therobotreport.com`**——月度机器人投资汇总
+- **`tracxn.com` / `pitchbook.com`**——搜索摘要里直接带创始人姓名、历轮总额、最新估值，
+  是补齐「创始人背景」「估值」字段的捷径
+- `itjuzi.com`（IT桔子）— 交易数据库，查具体公司的轮次历史
+- `caixin.com`（财新）有付费墙，摘要往往只有导语
 
 ### 社媒 / 社区热议
 
