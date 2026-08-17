@@ -13,10 +13,10 @@
     python push-to-ima.py --probe
 
     # 预演，打印将要发出的请求但不真正提交
-    python push-to-ima.py 周报.md --folder 新闻总结 --dry-run
+    python push-to-ima.py 周报.md --folder 知识总结 --dry-run
 
     # 正式投递
-    python push-to-ima.py 周报.md --kb 我的知识库 --folder 新闻总结
+    python push-to-ima.py 周报.md --kb 我的知识库 --folder 知识总结
 
 零第三方依赖，只用标准库。
 """
@@ -162,7 +162,7 @@ def main():
     ap.add_argument("file", nargs="?", help="要投递的 Markdown 文件")
     ap.add_argument("--kb", help="知识库名称（不传则用第一个可用知识库）")
     ap.add_argument("--kb-id", help="直接指定知识库 ID，跳过按名称查找")
-    ap.add_argument("--folder", default="新闻总结", help="目标文件夹名（默认：新闻总结）")
+    ap.add_argument("--folder", default="知识总结", help="目标文件夹名（默认：知识总结）")
     ap.add_argument("--folder-id", help="直接指定文件夹 ID，跳过按名称查找")
     ap.add_argument("--title", help="笔记标题（默认取文件名）")
     ap.add_argument("--probe", action="store_true", help="只列出知识库和文件夹，不写入")

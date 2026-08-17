@@ -52,7 +52,7 @@ export IMA_CLIENT_ID=...   # https://ima.qq.com/agent-interface 申请
 export IMA_API_KEY=...
 
 python skills/ai-news-brief/scripts/push-to-ima.py --probe          # 先探测
-python skills/ai-news-brief/scripts/push-to-ima.py 周报.md --folder 新闻总结
+python skills/ai-news-brief/scripts/push-to-ima.py 周报.md --folder 知识总结
 ```
 
 走 `notes/import_doc` 建笔记 → `wiki/add_knowledge`（`media_type=11`）挂进知识库文件夹的

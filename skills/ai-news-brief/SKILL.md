@@ -119,7 +119,7 @@ export IMA_API_KEY=...     # 申请地址 https://ima.qq.com/agent-interface
 python scripts/push-to-ima.py --probe
 
 # 正式投递
-python scripts/push-to-ima.py 2026-08-03-ai-weekly.md --kb 我的知识库 --folder 新闻总结
+python scripts/push-to-ima.py 2026-08-03-ai-weekly.md --kb 我的知识库 --folder 知识总结
 ```
 
 走的是 `notes/import_doc` 建笔记 → `wiki/add_knowledge`（`media_type=11`）挂进知识库文件夹
