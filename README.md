@@ -35,15 +35,20 @@ export.arxiv.org          → 连接超时
 
 ```
 skills/ai-news-brief/
-├── SKILL.md                      五步工作流 + 六条红线
+├── SKILL.md                      工作流 + 红线                    ≈2.1k tok
 ├── reference/
-│   ├── sources.md                实测校准的域名白名单/黑名单、WebFetch 可用性
-│   ├── queries.md                中英双语检索词库
-│   ├── funding.md                融资作业手册：两段式检索、领域分工、六字段规范、金额口径
-│   └── report-template.md        简报模板、三档重要性分级、空板块写法
+│   ├── runbook.md                运行手册：域名、检索词、六字段、  ≈3.7k tok
+│   │                             输出骨架、投递 —— 常规执行只读这份
+│   └── notes.md                  设计理由、环境校准、踩坑复盘 ——   ≈3.4k tok
+│                                 跑简报时不读，只在重新校准时读
 └── scripts/
     └── push-to-ima.py            投递到腾讯 IMA 知识库（零依赖，标准库）
 ```
+
+**运行时只载入 SKILL.md + runbook.md（约 5.8k token）。** 早期版本把四个参考文件
+都标成「必读」，每次载入 18.4k token，其中大部分是设计理由而非执行所需——
+渐进式披露失效是这类技能最大的隐性成本。改工作流时先问：这段文字是执行时必须的，
+还是解释为什么的？后者进 `notes.md`。
 
 ### 投递到腾讯 IMA 知识库
 
